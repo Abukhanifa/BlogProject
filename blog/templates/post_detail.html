@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <p><strong>Author:</strong> {{ post.author.username }}</p>
+    <p><strong>Created at:</strong> {{ post.created_at }}</p>
+
+    {% if request.user == post.author %}
+    <a href="{% url 'post_edit' post.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'post_delete' post.id %}" class="btn btn-danger">Delete</a>
+    
+    {%endif%}
+    <hr>
+
+    <h2>Comments</h2>
+    {% for comment in comments %}
+        <div class="comment">
+            <p><strong>{{ comment.author.username }}:</strong> {{ comment.content }}</p>
+            <p><small>Posted on {{ comment.created_at }}</small></p>
+        </div>
+    {% empty %}
+        <p>No comments yet.</p>
+    {% endfor %}
+
+   
+    <form method="POST">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+    </form>
+</div>
+{% endblock %}
+

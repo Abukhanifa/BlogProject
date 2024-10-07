@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Edit Profile</h1>
+    
+    <form method="POST" enctype="multipart/form-data">  <!-- Include enctype for file uploads -->
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Render the form fields -->
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+    
+    <a href="{% url 'profile_view' request.user.pk %}" class="btn btn-secondary">Cancel</a>  <!-- Link to cancel and go back to profile view -->
+</div>
+{% endblock %}
