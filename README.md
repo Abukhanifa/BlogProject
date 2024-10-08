@@ -1,4 +1,5 @@
-# Project Name:  BlogProject
+# Project Name: 
+BlogProject
 
 # Author:
 Abukhanifa Kuatuly
